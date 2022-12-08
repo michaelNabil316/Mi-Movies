@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharma_tv/presentation/screens/welcome_screen.dart';
 import '../../bussiness_logic/signing_bloc/cubit.dart';
 import '../../bussiness_logic/signing_bloc/states.dart';
 import '../../shared/cashHelper/chash_helper.dart';
@@ -9,7 +11,6 @@ import '../components/custom_elevated_button.dart';
 import '../components/custom_textField.dart';
 import '../components/hight_sized_box.dart';
 import '../components/toast_with_icon.dart';
-import 'home_screen.dart';
 import 'signup_screen.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
@@ -31,9 +32,9 @@ class _SigninScreenState extends State<SigninScreen> {
       child: BlocConsumer<SingingCubit, SigningStates>(
         listener: (context, state) {
           if (state is LoginSuccessgState) {
-            CashHelper.saveData(key: 'login', value: emailController.text);
+            CashHelper.saveData(key: 'name', value: nameController.text);
             showToast(msg: 'Signin Successfully', state: ToastStates.SUCCRSS);
-            navigateAndFinish(context, const MoviesListScreen());
+            navigateAndFinish(context, const WelcomeScreen());
           }
           if (state is LoginErrorState) {
             showToast(msg: state.error, state: ToastStates.ERROR);
@@ -65,15 +66,15 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                               const HightSizedBox(height: 0.03),
                               SizedBox(
-                                  height: 130,
+                                  height: 450.h,
                                   child: Image.asset('assets/cinema.jpg')),
                               const HightSizedBox(height: 0.02),
                               CustomTextField(
                                 isName: true,
-                                hint: 'Enter Your username',
+                                hint: 'Enter Your user name',
                                 prefixIcon: Icons.person_rounded,
-                                controller: emailController,
-                                error: 'Please Enter Your username',
+                                controller: nameController,
+                                error: 'Please Enter Your user name',
                               ),
                               const HightSizedBox(height: 0.015),
                               CustomTextField(
@@ -96,7 +97,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                         FocusScope.of(context).unfocus();
                                         if (formKey.currentState!.validate()) {
                                           SingingCubit.get(context).login(
-                                              name: emailController.text,
+                                              name: nameController.text,
                                               password:
                                                   passwordController.text);
                                         }

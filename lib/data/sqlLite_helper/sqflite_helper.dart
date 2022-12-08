@@ -18,7 +18,7 @@ class SqlLiteHelper {
     }, onOpen: (database) {});
     //create table for users
     await database.execute(
-        'CREATE TABLE IF NOT EXISTS users ( userId INTEGER PRIMARY KEY, userName TEXT , password TEXT)');
+        'CREATE TABLE IF NOT EXISTS users ( userId INTEGER PRIMARY KEY, userEmail TEXT , password TEXT)');
 
     // insert in database for the first time only
     if (CashHelper.getData(key: 'isInsertBefore') == null) {
@@ -28,15 +28,15 @@ class SqlLiteHelper {
   }
 
 //insert new user into the database
-  Future insertNewUser(String userName, String password) async {
-    userName = userName.trim();
+  Future insertNewUser(String userEmail, String password) async {
+    userEmail = userEmail.toLowerCase();
     var guest = await database
-        .rawQuery("SELECT * FROM users WHERE userName = '$userName'");
+        .rawQuery("SELECT * FROM users WHERE userEmail = '$userEmail'");
 
     if (guest.isEmpty) {
       await database.transaction((txn) async {
         txn.rawInsert(
-            'INSERT INTO users (userName, password) VALUES ("$userName" , "$password")');
+            'INSERT INTO users (userEmail, password) VALUES ("$userEmail" , "$password")');
       });
     } else {
       return 'error';
@@ -45,10 +45,10 @@ class SqlLiteHelper {
 
 //get user data
   Future<List<Map<String, dynamic>>> sqlLiteLogin(
-          String userName, String password) async =>
+          String userEmail, String password) async =>
       await database
           .rawQuery(
-              "SELECT userId, password FROM users WHERE userName = '${userName.trim()}'")
+              "SELECT userId, password FROM users WHERE userEmail = '$userEmail'") // and password = '$password'
           .then((value) {
         return value;
       }).catchError((error) {

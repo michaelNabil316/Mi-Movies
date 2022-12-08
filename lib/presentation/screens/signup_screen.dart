@@ -66,10 +66,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               const HightSizedBox(height: 0.05),
                               CustomTextField(
                                   isName: true,
-                                  hint: 'Enter Your username',
+                                  hint: 'Enter Your user name',
                                   prefixIcon: Icons.person_rounded,
                                   controller: emailController,
-                                  error: 'Please Enter username'),
+                                  error: 'Please Enter user name'),
                               const HightSizedBox(height: 0.015),
                               CustomTextField(
                                   isPassword: true,

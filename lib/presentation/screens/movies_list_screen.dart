@@ -17,6 +17,15 @@ class MoviesListScreen extends StatefulWidget {
 
 class _MoviesListScreenState extends State<MoviesListScreen> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      HomeCubit.get(context).getPopularMovies();
+      HomeCubit.get(context).clearCashIfError();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
@@ -28,7 +37,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
         final homeBloc = HomeCubit.get(context);
         return Scaffold(
           backgroundColor: lightPrimeColor,
-          appBar: CustomAppBar(title: "Mi Movie"),
+          appBar: customAppBar(title: "Mi Movie", context: context),
           body: homeBloc.moviesResponse == null
               ? const Center(child: CircularProgressIndicator())
               : homeBloc.moviesResponse!.isEmpty

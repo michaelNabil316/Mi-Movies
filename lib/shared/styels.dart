@@ -54,6 +54,23 @@ final overViewTxtStyle = TextStyle(
 final mainTitleStyle = TextStyle(
     fontWeight: FontWeight.bold, fontSize: 40.sp, color: Colors.amber[800]);
 
+final boldTxt = TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold);
+final boldTxtAmber = TextStyle(
+    fontSize: 70.sp, fontWeight: FontWeight.bold, color: Colors.amber[800]);
+
 final detailsStyle = TextStyle(
-    fontWeight: FontWeight.bold, fontSize: 45.sp, color: Colors.black);
+    fontWeight: FontWeight.bold, fontSize: 45.sp, color: Colors.black54);
 final appBarTitleStyle = TextStyle(color: Colors.white, fontSize: 70.sp);
+
+final cardDecoration = BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(10),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.grey.withOpacity(0.3),
+      spreadRadius: 3,
+      blurRadius: 5,
+      offset: Offset(0, 3),
+    ),
+  ],
+);

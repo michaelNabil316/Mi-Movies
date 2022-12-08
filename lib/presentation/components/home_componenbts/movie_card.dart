@@ -16,10 +16,7 @@ class MovieCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 15.h),
         padding: EdgeInsets.all(15.h),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
+        decoration: cardDecoration,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,8 +28,8 @@ class MovieCard extends StatelessWidget {
                         "$baseImgUrl${imgUrlSize}${movie.posterPath}"),
                     fit: BoxFit.fill,
                   )),
-              height: 350.h,
-              width: 140,
+              height: 370.h,
+              width: 260.w,
             ),
             SizedBox(width: 50.w),
             Column(

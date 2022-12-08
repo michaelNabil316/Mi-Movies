@@ -41,4 +41,13 @@ class HomeCubit extends Cubit<HomeStates> {
       moviesList.add(MovieModel.fromJson(movie));
     }
   }
+
+  clearCashIfError() {
+    if (moviesResponse != null) {
+      if (moviesResponse!.isEmpty) {
+        moviesResponse = null;
+        emit(ClearMoviesResponseState());
+      }
+    }
+  }
 }

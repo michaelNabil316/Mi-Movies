@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => SingingCubit()..createDB(),
         ),
         BlocProvider(
-          create: (BuildContext context) => HomeCubit()..getPopularMovies(),
+          create: (BuildContext context) => HomeCubit(),
         ),
         BlocProvider(
           create: (BuildContext context) => MovieCubit(),
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: customThemeData,
               title: 'MinaPharma Tv',
-              home: CashHelper.getData(key: 'login') != null
+              home: CashHelper.getData(key: 'name') != null
                   ? const WelcomeScreen()
                   : const SigninScreen(),
             );
